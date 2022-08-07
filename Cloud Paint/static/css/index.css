@@ -1,0 +1,52 @@
+body {
+    margin-left: 0;
+    background-image: url('../pictures/index-background.jpg');
+    min-height:100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+}
+
+div {
+    width: 45%;
+    background-color: white;
+    opacity: .5;
+    border-radius: 0 5px 5px 0;
+}
+
+h2 {
+    padding: 2%;
+    background: -webkit-linear-gradient(red, darkturquoise);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+p {
+    width: 25%;
+    padding: 1%;
+    background-color: white;
+    opacity: .5;
+    border-radius: 0 5px 5px 0;
+}
+
+span {
+    background: mediumvioletred;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+a {
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid mediumvioletred;
+    border-left: 1px solid transparent;
+}
+
+a:hover {
+    border: 1px solid mediumvioletred;
+}
+
+a:active {
+    border: 1px solid blueviolet;
+}
