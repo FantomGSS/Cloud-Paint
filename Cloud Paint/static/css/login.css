@@ -19,7 +19,19 @@ form {
 #container h1 {
     width: 100%;
     margin-top: 0;
+    margin-bottom: 0;
     text-align: center;
+}
+
+.invalid-data-error {
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    background-color: red;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    padding: 0.5%;
+    display: none;
 }
 
 input[type=text], input[type=password] {
