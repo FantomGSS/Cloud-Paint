@@ -8,8 +8,162 @@
 
     <link rel="icon" href="../../favicon.ico?v=1" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="../css/paint.css">
+
+    <script src="../js/paint.js"></script>
 </head>
 <body>
+
+    <div class="ribbon">
+
+        <!-- Section "Image" -->
+        <div class="section">
+            <div class="section-content">
+                <div class="icon-button">
+                    <img src="../paintIcons/File/new-picture.png">
+
+                    <div>New</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/File/open-picture.png">
+
+                    <div>Open</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/File/save-picture.png">
+
+                    <div>Save</div>
+                </div>
+            </div>
+
+            <div class="section-name">
+                Image
+            </div>
+        </div>
+
+        <!-- Separation -->
+        <div class="separator"></div>
+
+        <!-- Section "Tools" -->
+        <div class="section">
+            <div class="section-content">
+                <div class="icon-button">
+                    <img src="../paintIcons/Tools/pencil.png">
+
+                    <div>Pencil</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/Tools/airbrush.png">
+
+                    <div>Airbrush</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/Tools/fill-with-color.png">
+
+                    <div>Fill</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/Tools/eraser.png">
+
+                    <div>Eraser</div>
+                </div>
+            </div>
+
+            <div class="section-name">
+                Tools
+            </div>
+        </div>
+
+        <!-- Separation -->
+        <div class="separator"></div>
+
+        <!-- Section "Shapes" -->
+        <div class="section">
+            <div class="section-content">
+                <div class="icon-button">
+                    <img src="../paintIcons/Shapes/line.png">
+
+                    <div>Line</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/Shapes/rectangle.png">
+
+                    <div>Rectangle</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/Shapes/oval.png">
+
+                    <div>Circle</div>
+                </div>
+            </div>
+
+            <div class="section-name">
+                Shapes
+            </div>
+        </div>
+
+        <!-- Separation -->
+        <div class="separator"></div>
+
+        <!-- Section "Stroke" -->
+        <div class="section">
+            <div class="section-content">
+                <div class="icon-button dropdown drop-button" onclick="dropdownStroke()">
+                    <img src="../paintIcons/stroke.png" class="drop-button">
+
+                    <div class="drop-button">Size</div>
+
+                    <div id="strokeDropdown" class="dropdown-content">
+                        <div class="dropdown-content-item">
+                            <input class="radio-button" type="radio" name="stroke" value="1px" checked>
+
+                            <div class="dropdown-content-item-wrapper">
+                                <div class="dropdown-content-item-info" style="height: 1px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-content-item">
+                            <input class="radio-button" type="radio" name="stroke" value="3px">
+
+                            <div class="dropdown-content-item-wrapper">
+                                <div class="dropdown-content-item-info" style="height: 3px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-content-item">
+                            <input class="radio-button" type="radio" name="stroke" value="5px">
+
+                            <div class="dropdown-content-item-wrapper">
+                                <div class="dropdown-content-item-info" style="height: 5px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown-content-item">
+                            <input class="radio-button" type="radio" name="stroke" value="8px">
+
+                            <div class="dropdown-content-item-wrapper">
+                                <div class="dropdown-content-item-info" style="height: 8px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-name">
+                Stroke
+            </div>
+        </div>
+
+        <!-- Separation -->
+        <div class="separator"></div>
+
+    </div>
 
 </body>
 </html>

@@ -27,17 +27,13 @@ app.use(cookieParser());
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-const client = new Client({
+const dbClient = new Client({
     user: settings.user,
     password: settings.password,
     database: settings.database,
     host: settings.host,
     port: settings.port
 });
-
-(async () => {
-    await client.connect();
-})();
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/static/views/index.html');
@@ -52,45 +48,57 @@ app.get('/login', (req, res) => {
     }
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     let id = 0;
 
-    let checkArgs = async (username, password) => {
-        const selectResult = await client.query(`SELECT id from users where username = '${username}' and password = '${md5(password)}'`);
+    const selectResult = await dbClient.query(`SELECT id from users where username = '${username}' and password = '${md5(password)}'`);
 
-        let exist = false;
-        if (selectResult.rows.length !== 0) {
-            exist = true;
-            id = selectResult.rows[0].id;
-        }
-
-        return exist;
+    let exists = false;
+    if (selectResult.rows.length !== 0) {
+        exists = true;
+        id = selectResult.rows[0].id;
     }
 
-    (async () => {
-        let result = await checkArgs(username, password)
+    if (exists) {
+        let session = req.session;
+        session.userid = id;
+        session.username = username;
 
-        if (result) {
-            let session = req.session;
-            session.userid = id;
-            session.username = username;
-
-            res.redirect('/paint');
-        } else {
-            res.render(__dirname + '/static/views/login.html', {error: 1});
-        }
-    })();
+        res.redirect('/paint');
+    } else {
+        res.render(__dirname + '/static/views/login.html', {error: 1});
+    }
 });
 
 app.get('/paint', (req, res) => {
     let session = req.session;
     if (session.userid) {
-        res.sendFile(__dirname + '/static/views/paint.html');
+        res.render(__dirname + '/static/views/paint.html', {username: session.username});
     } else {
         res.redirect("/login");
     }
 });
 
-app.listen(port, () => console.log(`This app is listening on port ${port}`));
+const server = app.listen(port, async () => {
+    await dbClient.connect();
+    console.log('Database client has connected!')
+
+    console.log(`This app is listening on port ${port}`);
+});
+
+async function exit() {
+    await dbClient.end();
+    console.log('Database client has disconnected!')
+
+    server.close(() => {
+        console.log('Server closed!');
+    });
+}
+
+process.on("SIGINT", exit);
+process.on("SIGTERM", exit);
+process.on("SIGHUP", exit);
+
+
