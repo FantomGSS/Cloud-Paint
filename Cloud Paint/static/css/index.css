@@ -9,13 +9,13 @@ body {
 }
 
 div {
-    width: 45%;
+    width: 25%;
     background-color: white;
     opacity: .5;
     border-radius: 0 5px 5px 0;
 }
 
-h2 {
+h1 {
     padding: 2%;
     background: -webkit-linear-gradient(red, darkturquoise);
     -webkit-background-clip: text;
@@ -23,7 +23,8 @@ h2 {
 }
 
 p {
-    width: 25%;
+    width: 23%;
+    font-size: 18px;
     padding: 1%;
     background-color: white;
     opacity: .5;
@@ -31,7 +32,7 @@ p {
 }
 
 span {
-    background: mediumvioletred;
+    background: orangered;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -39,14 +40,15 @@ span {
 a {
     border-top: 1px solid transparent;
     border-right: 1px solid transparent;
-    border-bottom: 1px solid mediumvioletred;
+    border-bottom: 1px solid orangered;
     border-left: 1px solid transparent;
 }
 
 a:hover {
-    border: 1px solid mediumvioletred;
+    border: 1px solid orangered;
 }
 
 a:active {
     border: 1px solid blueviolet;
+    background-color: rgba(128, 128, 128, 0.15);
 }

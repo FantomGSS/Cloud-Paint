@@ -10,6 +10,22 @@
     <link rel="stylesheet" type="text/css" href="../css/paint.css">
 
     <script src="../js/paint.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <script>
+        function openGallery() {
+            document.getElementsByClassName("gallery")[0].style.display = "flex";
+
+            $("#dialog").dialog({
+                width: 1000,
+                height: 600,
+                resizable: false
+            });
+        }
+    </script>
 </head>
 <body>
 
@@ -18,7 +34,7 @@
         <!-- Section "Image" -->
         <div class="section">
             <div class="section-content">
-                <div class="icon-button">
+                <div class="icon-button" onclick="newCanvas()">
                     <img src="../paintIcons/File/new-picture.png">
 
                     <div>New</div>
@@ -30,7 +46,7 @@
                     <div>Open</div>
                 </div>
 
-                <div class="icon-button">
+                <div class="icon-button" onclick="savePicture()">
                     <img src="../paintIcons/File/save-picture.png">
 
                     <div>Save</div>
@@ -163,6 +179,175 @@
         <!-- Separation -->
         <div class="separator"></div>
 
+        <!-- Section "Colors" -->
+        <div class="section">
+            <div class="section-content">
+                <div class="current-color-button">
+                    <div class="current-color-border">
+                        <div class="current-color-content"></div>
+                    </div>
+
+                    <div>Color</div>
+                </div>
+
+                <div class="available-colors">
+                    <div class="row-colors">
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: black;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: gray;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: darkred;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: red;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: orange;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: yellow;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: green;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: turquoise;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: blue;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: cornflowerblue;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: purple;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: mediumpurple;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row-colors">
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: white;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: lightgray;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: saddlebrown;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: lightpink;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: gold;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: lightyellow;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: lime;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: paleturquoise;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: deepskyblue;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: steelblue;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: lavender;"></div>
+                        </div>
+                        <div class="available-color-border">
+                            <div class="available-color-content" style="background-color: violet;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-name">
+                Colors
+            </div>
+        </div>
+
+        <!-- Separation -->
+        <div class="separator"></div>
+
+        <!-- Section "Gallery" -->
+        <div class="section">
+            <div class="section-content">
+                <div class="icon-button" onclick="openGallery()">
+                    <img src="../paintIcons/Gallery/gallery.png">
+
+                    <div>Gallery</div>
+                </div>
+
+                <div class="icon-button">
+                    <img src="../paintIcons/Gallery/add-to-gallery.png">
+
+                    <div>Add</div>
+                </div>
+            </div>
+
+            <div class="section-name">
+                Gallery
+            </div>
+        </div>
+
+        <div id="dialog" title="Gallery">
+            <div class="gallery">
+
+                <% for (var i = 0; i < pictures.length; i++) { %>
+
+                    <div class="picture-entry">
+                        <div class="picture-box">
+                            <img src="../pictures/<%= pictures[i] %>.jpg">
+                        </div>
+                        <div class="picture-options">
+                            <div class="picture-option" onclick="choosePicture('../pictures/<%= pictures[i] %>.jpg')">
+                                <img src="../paintIcons/Gallery/choose.png">
+                            </div>
+                            <div class="picture-option" onclick="location.href = '/remove?title=<%= pictures[i] %>';">
+                                <img src="../paintIcons/Gallery/remove.png">
+                            </div>
+                        </div>
+                    </div>
+
+                <% } %>
+
+            </div>
+        </div>
+
+        <!-- Section "Profile" -->
+        <div class="profile">
+            <div class="section">
+                <div class="section-content">
+                    <div class="icon-button">
+                        <img src="../paintIcons/profile.png">
+
+                        <div><%= username %></div>
+                    </div>
+                </div>
+
+                <div class="section-name">
+                    Profile
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="canvas-wrapper">
+        <canvas id="canvas">
+
+        </canvas>
     </div>
 
 </body>

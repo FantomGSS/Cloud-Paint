@@ -7,6 +7,7 @@ const sessions = require('express-session');
 const { Client } = require('pg');
 const favicon = require('serve-favicon');
 const md5 = require('md5');
+const fs = require('fs');
 
 const port = 3000;
 
@@ -53,7 +54,7 @@ app.post('/login', async (req, res) => {
     let password = req.body.password;
     let id = 0;
 
-    const selectResult = await dbClient.query(`SELECT id from users where username = '${username}' and password = '${md5(password)}'`);
+    const selectResult = await dbClient.query(`SELECT id FROM users WHERE username = '${username}' AND password = '${md5(password)}';`);
 
     let exists = false;
     if (selectResult.rows.length !== 0) {
@@ -72,25 +73,53 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/paint', (req, res) => {
+app.get('/paint', async (req, res) => {
     let session = req.session;
     if (session.userid) {
-        res.render(__dirname + '/static/views/paint.html', {username: session.username});
+        let pictures = [];
+
+        const selectResult = await dbClient.query(`SELECT title FROM pictures WHERE user_id = ${session.userid};`);
+
+        selectResult.rows.forEach(row => {
+            pictures.push(row.title);
+        });
+
+        res.render(__dirname + '/static/views/paint.html', {username: session.username, pictures: pictures});
     } else {
         res.redirect("/login");
     }
 });
 
+app.get('/remove', async (req, res) => {
+    let title = req.query.title;
+
+    await dbClient.query(`DELETE FROM pictures WHERE title = '${title}';`);
+
+    const path = `static/pictures/${title}.jpg`;
+
+    try {
+        fs.unlinkSync(path);
+    } catch(err) {
+        console.log(`An error occurred while deleting the picture with name "${title}": ${err}`);
+    }
+
+    res.redirect("/paint");
+});
+
+app.post('/open-picture', (req, res) => {
+
+});
+
 const server = app.listen(port, async () => {
     await dbClient.connect();
-    console.log('Database client has connected!')
+    console.log('Database client has connected!');
 
     console.log(`This app is listening on port ${port}`);
 });
 
 async function exit() {
     await dbClient.end();
-    console.log('Database client has disconnected!')
+    console.log('Database client has disconnected!');
 
     server.close(() => {
         console.log('Server closed!');
@@ -100,5 +129,3 @@ async function exit() {
 process.on("SIGINT", exit);
 process.on("SIGTERM", exit);
 process.on("SIGHUP", exit);
-
-
